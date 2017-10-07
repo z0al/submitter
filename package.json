@@ -5,5 +5,15 @@
   "license": "MIT",
   "author": "Ahmed T. Ali <ah.tajelsir@gmail.com>",
   "repository": "https://github.com/ahmed-taj/submitter",
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^4.0.0-beta.4",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
   "private": true
 }
