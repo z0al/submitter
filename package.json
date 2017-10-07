@@ -1,0 +1,9 @@
+{
+  "name": "submitter",
+  "version": "1.0.0",
+  "description": "A prettier interface for submitting GitHub issues/PRs",
+  "license": "MIT",
+  "author": "Ahmed T. Ali <ah.tajelsir@gmail.com>",
+  "repository": "https://github.com/ahmed-taj/submitter",
+  "private": true
+}
