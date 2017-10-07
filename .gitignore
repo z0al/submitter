@@ -86,3 +86,6 @@ typings/
 # Build output 
 dist
 .next
+
+# Ignore TODO.md
+TODO.md
