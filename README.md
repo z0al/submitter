@@ -8,4 +8,4 @@ Give it a star(:star:) :point_up_2:
 
 ## License
 
-MIT
+MIT © [Ahmed T. Ali](https://github.com/ahmed-taj)
