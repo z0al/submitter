@@ -1,6 +1,3 @@
-// Native
-const { parse } = require('url')
-
 // Packages
 const next = require('next')
 const Koa = require('koa')
