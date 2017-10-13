@@ -3,8 +3,8 @@ const { parse } = require('url')
 
 // Packages
 const next = require('next')
-const micro = require('micro')
-const match = require('micro-route/match')
+const Koa = require('koa')
+const Router = require('koa-router')
 
 // Ours
 const { dev, port } = require('./config')
@@ -12,14 +12,19 @@ const { dev, port } = require('./config')
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const server = micro(async (req, res) => {
-  const url = parse(req.url, true)
-  const { query } = url
-
-  return handle(req, res, url)
-})
-
 app.prepare().then(() => {
+  const server = new Koa()
+  const router = new Router()
+
+  // Routes
+  router.get('*', async ctx => {
+    await handle(ctx.req, ctx.res)
+    ctx.respond = false
+  })
+
+  server.use(router.routes())
+
+  // Start server
   server.listen(port, err => {
     if (err) throw err
 

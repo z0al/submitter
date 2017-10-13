@@ -7,13 +7,13 @@
   "repository": "https://github.com/ahmed-taj/submitter",
   "scripts": {
     "build": "next build",
-    "dev": "node .",
-    "start": "node ."
+    "dev": "node app.js",
+    "start": "NODE_ENV=production node app.js"
   },
   "dependencies": {
-    "micro": "^9.0.0",
-    "micro-route": "^2.4.0",
-    "next": "^4.0.0-beta.6",
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "next": "^4.0.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
