@@ -4,7 +4,7 @@ const Koa = require('koa')
 const Router = require('koa-router')
 
 // Ours
-const { dev, port } = require('./config')
+const { dev, port } = require('./config/env')
 
 const app = next({ dev })
 const handle = app.getRequestHandler()
