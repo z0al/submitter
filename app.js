@@ -2,6 +2,7 @@
 const Koa = require('koa')
 const Router = require('koa-router')
 const Next = require('next')
+const uuid = require('uuid/v4')
 
 // Ours
 const api = require('./api')
@@ -11,25 +12,28 @@ const app = Next({ dev })
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
-  const server = new Koa()
-  const router = new Router()
+	const server = new Koa()
+	const router = new Router()
 
-  // API routes
-  router.use(api.routes())
-  router.use(api.allowedMethods())
+	// Server keys
+	server.keys = [uuid()]
 
-  // Other routes
-  router.get('*', async ctx => {
-    await handle(ctx.req, ctx.res)
-    ctx.respond = false
-  })
+	// API routes
+	router.use(api.routes())
+	router.use(api.allowedMethods())
 
-  server.use(router.routes())
+	// Other routes
+	router.get('*', async ctx => {
+		await handle(ctx.req, ctx.res)
+		ctx.respond = false
+	})
 
-  // Start server
-  server.listen(port, err => {
-    if (err) throw err
+	server.use(router.routes())
 
-    console.log(`> Ready on http://localhost:${port}`)
-  })
+	// Start server
+	server.listen(port, err => {
+		if (err) throw err
+
+		console.log(`> Ready on http://localhost:${port}`)
+	})
 })
