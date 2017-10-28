@@ -6,6 +6,7 @@ const uuid = require('uuid/v4')
 
 // Ours
 const api = require('./api')
+const { loginRequired } = require('./lib/auth')
 const { dev, port } = require('./config/env')
 
 const app = Next({ dev })
@@ -21,6 +22,15 @@ app.prepare().then(() => {
 	// API routes
 	router.use(api.routes())
 	router.use(api.allowedMethods())
+
+	// Index page requires login
+	router.get('/', loginRequired, async ctx => {
+		if (!ctx.state.user) {
+			ctx.redirect('/login')
+		}
+		await app.render(ctx.req, ctx.res, '/index', ctx.query)
+		ctx.respond = false
+	})
 
 	// Other routes
 	router.get('*', async ctx => {
