@@ -22,7 +22,8 @@ api.get('/login', async ctx => {
 			client_id,
 			connection: 'github', // Don't show login widget, redirect to GitHub
 			redirect_uri: `${ctx.origin}/login/callback`,
-			response_type: 'code'
+			response_type: 'code',
+			scope: 'openid profile'
 		})}`
 	)
 })
