@@ -32,7 +32,11 @@ api.get('/login/callback', async ctx => {
 })
 
 api.get('/logout', async ctx => {
-	// TODO: Write logout logic here
+	// NOTE: This won't revoke the JWT token, however, it has a short lifetime,
+	// and will no longer be useful after it expired!
+	ctx.cookies.set('token', null, opt.cookies)
+	// Redirect the user back to the home
+	ctx.redirect('/')
 })
 
 module.exports = api

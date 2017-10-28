@@ -23,12 +23,12 @@ app.prepare().then(() => {
 	router.use(api.routes())
 	router.use(api.allowedMethods())
 
-	// Index page requires login
-	router.get('/', loginRequired, async ctx => {
+	// New page requires login
+	router.get('/new', loginRequired, async ctx => {
 		if (!ctx.state.user) {
 			ctx.redirect('/login')
 		}
-		await app.render(ctx.req, ctx.res, '/index', ctx.query)
+		await app.render(ctx.req, ctx.res, '/new', ctx.query)
 		ctx.respond = false
 	})
 
