@@ -3,14 +3,14 @@ const Router = require('koa-router')
 
 // Ours
 const opt = require('../config/options')
-const { buildAuthURL, exchangeCode } = require('../lib/auth')
+const { buildAuthURL, exchangeCode, loginRequired } = require('../lib/auth')
 
 // Globals
 const api = new Router()
 
-//---------------------------------------------------------------------
+//=============================================================================
 // > Authentication
-//---------------------------------------------------------------------
+//=============================================================================
 
 api.get('/login', async ctx => {
 	// Initiates the Authorization Code Grant flow and redirects the browser to
@@ -43,6 +43,16 @@ api.get('/logout', async ctx => {
 	ctx.cookies.set('next', null, opt.cookies)
 	// Redirect the user back to the index page
 	ctx.redirect('/')
+})
+
+//=============================================================================
+// > User info
+//=============================================================================
+
+api.get('/userinfo', loginRequired, async ctx => {
+	ctx.assert(ctx.state.user, 401, 'Unauthorized!')
+	ctx.type = 'application/json'
+	ctx.body = JSON.stringify(ctx.state.user)
 })
 
 module.exports = api
