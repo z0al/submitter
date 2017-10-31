@@ -1,5 +1,5 @@
 // Native
-const { stringify } = require('querystring')
+const { escape } = require('querystring')
 
 // Packages
 const Koa = require('koa')
@@ -29,7 +29,8 @@ app.prepare().then(() => {
 	// New page requires login
 	router.get('/new', loginRequired, async ctx => {
 		if (!ctx.state.user) {
-			ctx.redirect(`/login/?next=${stringify(ctx.href)}`)
+			ctx.redirect(`/login/?next=${escape(ctx.href)}`)
+			return
 		}
 		ctx.status = 200
 		await app.render(ctx.req, ctx.res, '/new', ctx.query)
