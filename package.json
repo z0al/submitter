@@ -4,6 +4,7 @@
 	"description": "A prettier interface for submitting GitHub issues/PRs",
 	"license": "MIT",
 	"author": "Ahmed T. Ali <ah.tajelsir@gmail.com>",
+	"private": true,
 	"repository": "https://github.com/ahmed-taj/submitter",
 	"scripts": {
 		"build": "next build",
@@ -11,6 +12,7 @@
 		"start": "NODE_ENV=production node app.js"
 	},
 	"dependencies": {
+		"isomorphic-unfetch": "^2.0.0",
 		"jwks-rsa": "^1.2.1",
 		"koa": "^2.3.0",
 		"koa-jwt": "^3.2.2",
@@ -22,5 +24,7 @@
 		"request-promise-native": "^1.0.5",
 		"uuid": "^3.1.0"
 	},
-	"private": true
+	"devDependencies": {
+		"dotenv": "^4.0.0"
+	}
 }
