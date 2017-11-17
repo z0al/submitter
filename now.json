@@ -1,11 +1,11 @@
 {
-  "name": "submitter",
-  "alias": ["submit", "submitter"],
-  "type": "npm",
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "engines": {
-    "node": "8.7.0"
-  }
+	"name": "submitter",
+	"alias": ["submit"],
+	"type": "npm",
+	"env": {
+		"NODE_ENV": "production"
+	},
+	"engines": {
+		"node": ">= 8.4"
+	}
 }

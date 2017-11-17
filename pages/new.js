@@ -12,7 +12,7 @@ class Page extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Coming soon! Thank you {this.props.profile.name}</h1>
+				<h1>Coming soon! Thank you {this.props.profile.login}</h1>
 			</div>
 		)
 	}

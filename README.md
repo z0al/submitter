@@ -5,9 +5,9 @@
 
 # Submitter 🤖
 
-> Work in progress, see my dev.to posts [series](https://dev.to/ahmedtaj/idea-to-build-submission-friendly-projects-intro-2dc) for details
+> Work in progress, see my posts [series](https://medium.com/ahmed-t-ali/submission-friendly-projects-introduction-fc6a22b78ddc) for details
 
-A prettier interface for submitting GitHub issues/PRs.
+A prettier interface for submitting GitHub issues.
 
 ## How it works
 
