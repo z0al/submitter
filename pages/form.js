@@ -1,7 +1,7 @@
 // Ours
 import fetch from '../lib/fetch'
 
-class Page extends React.Component {
+class FormPage extends React.Component {
 	static async getInitialProps({ req }) {
 		const res = await fetch(req, '/userinfo')
 		const profile = await res.json()
@@ -18,4 +18,4 @@ class Page extends React.Component {
 	}
 }
 
-export default Page
+export default FormPage
