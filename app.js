@@ -3,11 +3,10 @@ const Koa = require('koa')
 const Router = require('koa-router')
 const Session = require('koa-session')
 const Next = require('next')
-const uuid = require('uuid/v4')
 
 // Ours
 const api = require('./api')
-const { dev, port } = require('./config/env')
+const { dev, port, secret } = require('./config/env')
 const passport = require('./lib/auth')
 
 const app = Next({ dev })
@@ -18,10 +17,10 @@ app.prepare().then(() => {
 	const router = new Router()
 
 	// Keys
-	server.keys = [uuid()]
+	server.keys = [secret]
 
 	// Session
-	server.use(Session({ key: 'session', rolling: true }, server))
+	server.use(Session({ key: 'session' }, server))
 
 	// Passport
 	server.use(passport.initialize())
@@ -34,13 +33,11 @@ app.prepare().then(() => {
 	// New page
 	router.get('/new', async ctx => {
 		if (!ctx.isAuthenticated()) {
-			// NOTE: enabling this throws:
-			//
-			// 		Error: Can't set headers after they are sent.
-			//
-			// ctx.session.returnTo = ctx.href
+			// Will be used later Passport
+			ctx.session.returnTo = ctx.href
 			ctx.redirect('/login')
 		} else {
+			ctx.status = 200
 			await app.render(ctx.req, ctx.res, '/new', ctx.query)
 			ctx.respond = false
 		}
