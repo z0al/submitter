@@ -6,6 +6,6 @@
 		"NODE_ENV": "production"
 	},
 	"engines": {
-		"node": ">= 8.4"
+		"node": "8.x"
 	}
 }

@@ -33,13 +33,18 @@ next.prepare().then(() => {
 	// New page
 	router.get('/form', async ctx => {
 		if (!ctx.isAuthenticated()) {
-			// Will be used later Passport
+			// Will be used later by Passport
 			ctx.session.returnTo = ctx.href
 			ctx.redirect('/login')
 		} else {
-			ctx.status = 200
-			await next.render(ctx.req, ctx.res, '/form', ctx.query)
-			ctx.respond = false
+			// Redirect to home page if no 'repo' param
+			if (!ctx.query.repo) {
+				ctx.redirect('/')
+			} else {
+				ctx.status = 200
+				await next.render(ctx.req, ctx.res, '/form', ctx.query)
+				ctx.respond = false
+			}
 		}
 	})
 
