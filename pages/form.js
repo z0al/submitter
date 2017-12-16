@@ -1,20 +1,9 @@
 // Ours
-import fetch from '../lib/fetch'
+import { host } from '../config/client'
 
 class FormPage extends React.Component {
-	static async getInitialProps({ req }) {
-		const res = await fetch(req, '/userinfo')
-		const profile = await res.json()
-
-		return { profile }
-	}
-
 	render() {
-		return (
-			<div>
-				<h1>Coming soon! Thank you {this.props.profile.login}</h1>
-			</div>
-		)
+		return <h1>Nothing yet, Sorry!</h1>
 	}
 }
 
