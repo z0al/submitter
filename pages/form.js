@@ -6,11 +6,10 @@ class FormPage extends React.Component {
 	static async getInitialProps({ req }) {
 		const res = await fetch(req, req.url, { method: 'POST' })
 		if (res.ok) {
-			console.log(res.statusCode)
 			const details = await res.json()
-			return { found: false, ...details }
+			return { found: true, ...details }
 		}
-		return { found: true }
+		return { found: false }
 	}
 
 	render() {
