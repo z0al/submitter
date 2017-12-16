@@ -6,13 +6,18 @@ class FormPage extends React.Component {
 	static async getInitialProps({ req }) {
 		const res = await fetch(req, req.url, { method: 'POST' })
 		if (res.ok) {
+			console.log(res.statusCode)
 			const details = await res.json()
-			return { ...details }
+			return { found: false, ...details }
 		}
-		return {}
+		return { found: true }
 	}
 
 	render() {
+		// Repository not found
+		if (!this.props.found) {
+			return <h1>We couldn't find the repository you're looking for!</h1>
+		}
 		if (!this.props.possible) {
 			return (
 				<h1>
