@@ -12,10 +12,10 @@ class IssueForm extends React.Component {
 	//=============================================================================
 
 	componentWillMount() {
-		// const { types } = this.props.meta
-		// if (types && types.length > 0) {
-		// 	this.setState({ filter: this.normalizeType(types[1]) })
-		// }
+		const { types } = this.props.meta
+		if (types && types.length > 0) {
+			this.setState({ filter: this.normalizeType(types[0]) })
+		}
 	}
 
 	//=============================================================================
@@ -26,8 +26,8 @@ class IssueForm extends React.Component {
 		return typestr.toLowerCase().replace(/\s{2,}/g, ' ')
 	}
 
-	changeFilter(event) {
-		// TODO
+	changeFilter(event, data) {
+		this.setState({ filter: data.value })
 	}
 
 	//=============================================================================
@@ -39,16 +39,16 @@ class IssueForm extends React.Component {
 		// placeholder instead of normal description
 		const placeholder = /\((.*)\)/.exec(help)
 		if (placeholder) {
-			return <textarea placeholder={placeholder[1]} rows="3" />
+			return <Form.TextArea placeholder={placeholder[1]} autoHeight />
 		}
-		return [<p>{help}</p>, <textarea rows="3" />]
+		return [<p>{help}</p>, <Form.TextArea autoHeight />]
 	}
 
 	renderNote() {
 		const { note } = this.props.meta
 		if (note) {
 			return (
-				<Message color="blue">
+				<Message color="yellow">
 					<Message.Header>Note</Message.Header>
 					<p>{note}</p>
 				</Message>
@@ -57,24 +57,49 @@ class IssueForm extends React.Component {
 		return null
 	}
 
+	renderTypes() {
+		const { types } = this.props.meta
+		if (types) {
+			const options = types.map(t => ({
+				text: t,
+				value: this.normalizeType(t)
+			}))
+			return (
+				<Form.Dropdown
+					inline
+					label="I'm submitting"
+					options={options}
+					style={{ color: 'purple' }}
+					defaultValue={options[0].value}
+					onChange={this.changeFilter.bind(this)}
+				/>
+			)
+		}
+		return null
+	}
+
 	renderFields() {
-		return (
-			this.props.fields
-				// .filter(f => {
-				// 	if (this.state.filter) {
-				// 		return f.only_for === this.state.filter ? true : false
-				// 	}
-				// 	return true
-				// })
-				.map((f, key) => {
-					return (
-						<Form.Field key={key}>
-							<label>{f.title}</label>
-							{this.renderInput(f.help)}
-						</Form.Field>
-					)
-				})
-		)
+		return this.props.fields
+			.filter(f => {
+				if (this.state.filter) {
+					if (f.only_for === null) {
+						return true
+					}
+					if (f.only_for === this.state.filter) {
+						return true
+					}
+					return false
+				}
+				return true
+			})
+			.map((f, key) => {
+				return (
+					<Form.Field key={key}>
+						<label>{f.title}</label>
+						{this.renderInput(f.help)}
+					</Form.Field>
+				)
+			})
 	}
 
 	render() {
@@ -87,6 +112,7 @@ class IssueForm extends React.Component {
 					{this.renderNote()}
 					<Form.Input placeholder="Title" />
 
+					{this.renderTypes()}
 					{this.renderFields()}
 
 					<Form.Group style={{ float: 'right' }}>
