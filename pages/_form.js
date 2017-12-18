@@ -15,7 +15,7 @@ class FormPage extends React.Component {
 		const full_name = `${owner}/${name}`
 
 		// Request submit.yml file
-		const res = await fetch(req, `/api/${full_name}/submit.yml`)
+		const res = await fetch(req, `/api/${full_name}/submit.json`)
 
 		if (!res.ok) {
 			return { found: false, full_name }
