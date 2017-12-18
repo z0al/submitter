@@ -8,6 +8,7 @@ const Next = require('next')
 const api = require('./api')
 const { dev, port, secret } = require('./config/env')
 const passport = require('./lib/auth')
+const github = require('./lib/github')
 
 const next = Next({ dev })
 const handle = next.getRequestHandler()
@@ -41,7 +42,29 @@ next.prepare().then(() => {
 			if (!ctx.query.repo) {
 				ctx.redirect('/')
 			} else {
-				ctx.status = 200
+				// GitHub token
+				const { token } = ctx.state.user
+				const slug = ctx.query.repo
+
+				const repo = await github.getRepo(token, slug)
+
+				if (!repo) {
+					ctx.status = 404
+					ctx.body = "We couldn't find the repository you're looking for!"
+					return
+				}
+
+				// Extract necessary details
+				const { full_name, archived, default_branch, has_issues } = repo
+
+				// Will we be able to create a new issue?
+				if (!has_issues || archived) {
+					ctx.status = 412
+					ctx.body =
+						'The repository is either archived or the issues are disabled!'
+					return
+				}
+
 				await next.render(ctx.req, ctx.res, '/form', ctx.query)
 				ctx.respond = false
 			}
