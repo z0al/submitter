@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
 
 	render() {
 		return (
-			<html>
+			<html lang="en">
 				<Head>
 					<meta charset="UTF-8" />
 					<meta
@@ -18,10 +18,12 @@ export default class MyDocument extends Document {
 						content="width=device-width, initial-scale=1.0"
 					/>
 					<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-					<title>Submit | A Prettier UI for Submitting GitHub Issues</title>
+					<title>
+						Submitter 🤖 | A Prettier UI for Submitting GitHub Issues
+					</title>
 					<link
 						rel="stylesheet"
-						href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
+						href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
 					/>
 				</Head>
 				<body>

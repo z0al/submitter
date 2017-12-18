@@ -11,10 +11,10 @@ class IssueForm extends React.Component {
 	//=============================================================================
 
 	componentWillMount() {
-		const { types } = this.props.meta
-		if (types && types.length > 0) {
-			this.setState({ filter: this.normalizeType(types[1]) })
-		}
+		// const { types } = this.props.meta
+		// if (types && types.length > 0) {
+		// 	this.setState({ filter: this.normalizeType(types[1]) })
+		// }
 	}
 
 	//=============================================================================
@@ -56,21 +56,23 @@ class IssueForm extends React.Component {
 	}
 
 	renderFields() {
-		return this.props.fields
-			.filter(f => {
-				if (this.state.filter) {
-					return f.only_for === this.state.filter ? true : false
-				}
-				return true
-			})
-			.map((f, key) => {
-				return (
-					<div key={key}>
-						<label>{f.title}</label>
-						{this.renderInput(f.help)}
-					</div>
-				)
-			})
+		return (
+			this.props.fields
+				// .filter(f => {
+				// 	if (this.state.filter) {
+				// 		return f.only_for === this.state.filter ? true : false
+				// 	}
+				// 	return true
+				// })
+				.map((f, key) => {
+					return (
+						<div key={key}>
+							<label>{f.title}</label>
+							{this.renderInput(f.help)}
+						</div>
+					)
+				})
+		)
 	}
 
 	render() {
