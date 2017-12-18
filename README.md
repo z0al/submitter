@@ -1,6 +1,6 @@
 # Submitter 🤖
 
-A prettier interface for submitting GitHub issues.
+A Prettier UI for Submitting GitHub Issues
 
 ## How it works
 
