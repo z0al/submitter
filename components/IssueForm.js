@@ -1,5 +1,6 @@
 // Packages
 import React from 'react'
+import { Form, Container, Message, Button } from 'semantic-ui-react'
 
 class IssueForm extends React.Component {
 	constructor() {
@@ -38,21 +39,22 @@ class IssueForm extends React.Component {
 		// placeholder instead of normal description
 		const placeholder = /\((.*)\)/.exec(help)
 		if (placeholder) {
-			return <textarea placeholder={placeholder[1]} />
+			return <textarea placeholder={placeholder[1]} rows="3" />
 		}
-		return [<p>{help}</p>, <textarea />]
+		return [<p>{help}</p>, <textarea rows="3" />]
 	}
 
-	renderMeta() {
-		const meta = []
-		const { types, note } = this.props.meta
+	renderNote() {
+		const { note } = this.props.meta
 		if (note) {
-			meta.push(<p> NOTE: {note}</p>)
+			return (
+				<Message color="blue">
+					<Message.Header>Note</Message.Header>
+					<p>{note}</p>
+				</Message>
+			)
 		}
-		if (types && types.length > 0) {
-			// TODO
-		}
-		return meta
+		return null
 	}
 
 	renderFields() {
@@ -66,10 +68,10 @@ class IssueForm extends React.Component {
 				// })
 				.map((f, key) => {
 					return (
-						<div key={key}>
+						<Form.Field key={key}>
 							<label>{f.title}</label>
 							{this.renderInput(f.help)}
-						</div>
+						</Form.Field>
 					)
 				})
 		)
@@ -77,14 +79,24 @@ class IssueForm extends React.Component {
 
 	render() {
 		return (
-			<form action={'/to/' + this.props.path} method="POST">
-				{this.renderMeta()}
-				{this.renderFields()}
-				<h4>Meta</h4>
-				<pre>{JSON.stringify(this.props.meta, null, 2)}</pre>
-				<h4>Fields</h4>
-				<pre>{JSON.stringify(this.props.fields, null, 2)}</pre>
-			</form>
+			<Container
+				textAlign="left"
+				style={{ padding: '4em 0px', marginBottom: '50px' }}
+			>
+				<Form size="large">
+					{this.renderNote()}
+					<Form.Input placeholder="Title" />
+
+					{this.renderFields()}
+
+					<Form.Group style={{ float: 'right' }}>
+						<Form.Button size="large">Preview</Form.Button>
+						<Form.Button color="purple" size="large">
+							Submit
+						</Form.Button>
+					</Form.Group>
+				</Form>
+			</Container>
 		)
 	}
 }

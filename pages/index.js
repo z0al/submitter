@@ -1,5 +1,5 @@
 // Packages
-import { Header, FormButton, Form, FormInput, Icon } from 'semantic-ui-react'
+import { Header, Form, Icon } from 'semantic-ui-react'
 
 class IndexPage extends React.Component {
 	constructor() {
@@ -18,16 +18,16 @@ class IndexPage extends React.Component {
 						fontWeight: 'normal'
 					}}
 				/>
-				<FormInput
+				<Form.Input
 					size="large"
 					icon="search"
 					iconPosition="left"
 					placeholder="e.g microsoft/vscode"
 					onChange={e => this.setState({ slug: `/to/${e.target.value}` })}
 				/>
-				<FormButton positive size="large">
+				<Form.Button positive size="large">
 					GET STARTED
-				</FormButton>
+				</Form.Button>
 			</Form>
 		)
 	}
