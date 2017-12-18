@@ -44,15 +44,14 @@ api.get('/api/userinfo', async ctx => {
 // > Form endpoint
 //=============================================================================
 
-api.get('/api/:owner/:repo/submit.yml', async ctx => {
+api.get('/api/:owner/:name/submit.yml', async ctx => {
 	ctx.assert(ctx.isAuthenticated(), 401, 'Unauthorized!')
 	ctx.type = 'text/plain'
 
 	// OAuth2 token
 	const { token } = ctx.state.user
-	const slug = `${ctx.params.owner}/${ctx.params.repo}`
-
-	const repo = await github.getRepo(token, slug)
+	const { owner, name } = ctx.params
+	const repo = await github.getRepo(token, owner, name)
 
 	if (!repo) {
 		ctx.status = 404
@@ -64,7 +63,7 @@ api.get('/api/:owner/:repo/submit.yml', async ctx => {
 
 	// Get repository Form
 	try {
-		const res = await github.getForm(full_name, default_branch)
+		const res = await github.getForm(owner, name, default_branch)
 		if (res.ok) {
 			ctx.body = await res.text()
 		} else {

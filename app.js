@@ -32,7 +32,7 @@ next.prepare().then(() => {
 	router.use(api.allowedMethods())
 
 	// Submission page
-	router.get('/to/:owner/:repo', async ctx => {
+	router.get('/to/:owner/:name', async ctx => {
 		if (!ctx.isAuthenticated()) {
 			// Will be used later by Passport
 			ctx.session.returnTo = ctx.href
@@ -40,9 +40,8 @@ next.prepare().then(() => {
 		} else {
 			// GitHub token
 			const { token } = ctx.state.user
-			const slug = `${ctx.params.owner}/${ctx.params.repo}`
-
-			const repo = await github.getRepo(token, slug)
+			const { owner, name } = ctx.params
+			const repo = await github.getRepo(token, owner, name)
 
 			if (!repo) {
 				ctx.status = 404
