@@ -1,5 +1,15 @@
+// Packages
 import Document, { Head, Main, NextScript } from 'next/document'
 import flush from 'styled-jsx/server'
+import {
+	Segment,
+	Container,
+	Menu,
+	Button,
+	Image,
+	Label,
+	Icon
+} from 'semantic-ui-react'
 
 export default class MyDocument extends Document {
 	static getInitialProps({ renderPage }) {
@@ -19,16 +29,49 @@ export default class MyDocument extends Document {
 					/>
 					<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 					<title>
-						Submitter 🤖 | A Prettier UI for Submitting GitHub Issues
+						Submitter 🚀 | A Prettier UI for Submitting GitHub Issues
 					</title>
 					<link
 						rel="stylesheet"
-						href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
+						href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
 					/>
 				</Head>
 				<body>
-					<Main />
-					<NextScript />
+					<Segment
+						textAlign="center"
+						style={{ minHeight: 700, padding: '1em 0em' }}
+						vertical
+					>
+						<Container>
+							<Menu secondary size="small">
+								<Menu.Item>
+									<Image
+										href="/"
+										size="mini"
+										src="/static/rocket.svg"
+										alt="rocket emoji"
+									/>
+									<Label pointing="left" color="purple">
+										BETA
+									</Label>
+								</Menu.Item>
+								<Menu.Item position="right">
+									<Button
+										basic
+										as="a"
+										href="https://github.com/ahmed-taj/submitter"
+									>
+										<Icon name="github" />
+										Fork on GitHub
+									</Button>
+								</Menu.Item>
+							</Menu>
+						</Container>
+						<Container text>
+							<Main />
+							<NextScript />
+						</Container>
+					</Segment>
 				</body>
 			</html>
 		)
