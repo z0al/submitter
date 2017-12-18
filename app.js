@@ -31,42 +31,37 @@ next.prepare().then(() => {
 	router.use(api.routes())
 	router.use(api.allowedMethods())
 
-	// New page
-	router.get('/form', async ctx => {
+	// Submission page
+	router.get('/to/:owner/:repo', async ctx => {
 		if (!ctx.isAuthenticated()) {
 			// Will be used later by Passport
 			ctx.session.returnTo = ctx.href
 			ctx.redirect('/login')
 		} else {
-			// Redirect to home page if no 'repo' param
-			if (!ctx.query.repo) {
-				ctx.redirect('/')
-			} else {
-				// GitHub token
-				const { token } = ctx.state.user
-				const slug = ctx.query.repo
+			// GitHub token
+			const { token } = ctx.state.user
+			const slug = `${ctx.params.owner}/${ctx.params.repo}`
 
-				const repo = await github.getRepo(token, slug)
+			const repo = await github.getRepo(token, slug)
 
-				if (!repo) {
-					ctx.status = 404
-					ctx.body = "We couldn't find the repository you're looking for!"
-					return
-				}
-
-				// Extract necessary details
-				const { archived, has_issues } = repo
-
-				// Will we be able to create a new issue?
-				if (!has_issues || archived) {
-					ctx.status = 412
-					ctx.body = 'The repository is either archived or issues are disabled!'
-					return
-				}
-
-				await next.render(ctx.req, ctx.res, '/form', ctx.query)
-				ctx.respond = false
+			if (!repo) {
+				ctx.status = 404
+				ctx.body = "We couldn't find the repository you're looking for!"
+				return
 			}
+
+			// Extract necessary details
+			const { archived, has_issues } = repo
+
+			// Will we be able to create a new issue?
+			if (!has_issues || archived) {
+				ctx.status = 412
+				ctx.body = 'The repository is either archived or issues are disabled!'
+				return
+			}
+
+			await next.render(ctx.req, ctx.res, '/_form', ctx.query)
+			ctx.respond = false
 		}
 	})
 
