@@ -17,11 +17,16 @@ class FormPage extends React.Component {
 		// Request submit.yml file
 		const res = await fetch(req, `/api/${full_name}/submit.yml`)
 
-		if (res.ok) {
-			const src = await res.text()
-			return { found: true, src, full_name }
+		if (!res.ok) {
+			return { found: false, full_name }
 		}
-		return { found: false, full_name }
+
+		try {
+			const src = await res.json()
+			return { found: true, src, full_name }
+		} catch (err) {
+			return { found: false, full_name }
+		}
 	}
 
 	render() {

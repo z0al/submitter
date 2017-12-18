@@ -4,6 +4,7 @@ const Router = require('koa-router')
 // Ours
 const passport = require('./auth')
 const github = require('../lib/github')
+const validateForm = require('../lib/schema')
 
 // Globals
 const api = new Router()
@@ -44,9 +45,9 @@ api.get('/api/userinfo', async ctx => {
 // > Form endpoint
 //=============================================================================
 
-api.get('/api/:owner/:name/submit.yml', async ctx => {
+api.get('/api/:owner/:name/submit.json', async ctx => {
 	ctx.assert(ctx.isAuthenticated(), 401, 'Unauthorized!')
-	ctx.type = 'text/plain'
+	ctx.type = 'application/json'
 
 	// OAuth2 token
 	const { token } = ctx.state.user
@@ -62,15 +63,16 @@ api.get('/api/:owner/:name/submit.yml', async ctx => {
 	const { full_name, default_branch } = repo
 
 	// Get repository Form
-	try {
-		const res = await github.getForm(owner, name, default_branch)
-		if (res.ok) {
-			ctx.body = await res.text()
-		} else {
-			ctx.status = 404
+	const res = await github.getForm(owner, name, default_branch)
+	if (res.ok) {
+		const text = await res.text()
+		try {
+			ctx.body = JSON.stringify(await validateForm(text))
+		} catch (err) {
+			ctx.status = 422
 		}
-	} catch (err) {
-		ctx.status = 500
+	} else {
+		ctx.status = 404
 	}
 })
 
