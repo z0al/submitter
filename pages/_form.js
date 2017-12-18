@@ -1,3 +1,6 @@
+// Packages
+import { Container, Header } from 'semantic-ui-react'
+
 // Ours
 import { host } from '../config/client'
 import fetch from '../lib/fetch'
@@ -40,10 +43,21 @@ class FormPage extends React.Component {
 			)
 		} else {
 			return (
-				<p>
-					Looks like the repository at {this.props.full_name} isn't submission
-					friendly!
-				</p>
+				<Container style={{ paddingTop: '10em' }}>
+					<Header as="h1">
+						):
+						<Header.Subheader>
+							Looks like the repository at{' '}
+							<a
+								href={`https://github.com/${this.props.full_name}`}
+								style={{ color: 'blue', fontWeight: 'bold' }}
+							>
+								{this.props.full_name}
+							</a>{' '}
+							isn't submission friendly!
+						</Header.Subheader>
+					</Header>
+				</Container>
 			)
 		}
 	}
