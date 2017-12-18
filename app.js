@@ -55,13 +55,12 @@ next.prepare().then(() => {
 				}
 
 				// Extract necessary details
-				const { full_name, archived, default_branch, has_issues } = repo
+				const { archived, has_issues } = repo
 
 				// Will we be able to create a new issue?
 				if (!has_issues || archived) {
 					ctx.status = 412
-					ctx.body =
-						'The repository is either archived or the issues are disabled!'
+					ctx.body = 'The repository is either archived or issues are disabled!'
 					return
 				}
 
