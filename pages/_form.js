@@ -3,7 +3,7 @@ import { host } from '../config/client'
 import fetch from '../lib/fetch'
 
 // Components
-import Form from '../components/Form'
+import IssueForm from '../components/IssueForm'
 
 class FormPage extends React.Component {
 	static async getInitialProps({ req }) {
@@ -31,7 +31,13 @@ class FormPage extends React.Component {
 
 	render() {
 		if (this.props.found) {
-			return <Form src={this.props.src} />
+			return (
+				<IssueForm
+					meta={this.props.src.meta}
+					fields={this.props.src.form}
+					path={this.props.full_name}
+				/>
+			)
 		} else {
 			return (
 				<p>
