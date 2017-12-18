@@ -17,6 +17,8 @@ class FormPage extends React.Component {
 		if (!this.props.found) {
 			return <h1>We couldn't find the repository you're looking for!</h1>
 		}
+
+		// Repository is either archived or issues are disabled
 		if (!this.props.possible) {
 			return (
 				<h1>
@@ -24,6 +26,14 @@ class FormPage extends React.Component {
 				</h1>
 			)
 		}
+
+		// Either no form or invalid one
+		if (!this.props.form.valid) {
+			return (
+				<h1>Sorry, looks like the repository isn't submission friendly :/</h1>
+			)
+		}
+
 		return <h1>Nothing yet, Sorry!</h1>
 	}
 }
