@@ -1,5 +1,5 @@
 // Packages
-import { Header, Button, Form, FormInput, Icon } from 'semantic-ui-react'
+import { Header, FormButton, Form, FormInput, Icon } from 'semantic-ui-react'
 
 class IndexPage extends React.Component {
 	constructor() {
@@ -9,7 +9,7 @@ class IndexPage extends React.Component {
 
 	render() {
 		return (
-			<Form style={{ marginTop: '9em' }}>
+			<Form style={{ marginTop: '9em' }} action={this.state.slug}>
 				<Header
 					as="h2"
 					content="A Prettier UI for Submitting GitHub Issues"
@@ -22,13 +22,12 @@ class IndexPage extends React.Component {
 					size="large"
 					icon="search"
 					iconPosition="left"
-					name="slug"
 					placeholder="e.g microsoft/vscode"
-					onChange={e => this.setState({ slug: `to/${e.target.value}` })}
+					onChange={e => this.setState({ slug: e.target.value })}
 				/>
-				<Button positive size="large" href={this.state.slug}>
+				<FormButton positive size="large">
 					GET STARTED
-				</Button>
+				</FormButton>
 			</Form>
 		)
 	}

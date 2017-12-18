@@ -32,7 +32,7 @@ next.prepare().then(() => {
 	router.use(api.allowedMethods())
 
 	// Submission page
-	router.get('/to/:owner/:name', async ctx => {
+	router.get('/:owner/:name', async ctx => {
 		if (!ctx.isAuthenticated()) {
 			// Will be used later by Passport
 			ctx.session.returnTo = ctx.href
