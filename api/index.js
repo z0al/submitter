@@ -34,7 +34,7 @@ api.get('/logout', async ctx => {
 // > User info
 //=============================================================================
 
-api.get('/userinfo', async ctx => {
+api.get('/api/userinfo', async ctx => {
 	ctx.assert(ctx.isAuthenticated(), 401, 'Unauthorized!')
 	ctx.type = 'application/json'
 	ctx.body = JSON.stringify(ctx.state.user)
@@ -44,33 +44,35 @@ api.get('/userinfo', async ctx => {
 // > Form endpoint
 //=============================================================================
 
-api.post('/form', async ctx => {
+api.get('/api/:owner/:repo/submit.yml', async ctx => {
 	ctx.assert(ctx.isAuthenticated(), 401, 'Unauthorized!')
-	ctx.type = 'application/json'
+	ctx.type = 'text/plain'
 
 	// OAuth2 token
 	const { token } = ctx.state.user
-	const query = ctx.query.repo
+	const slug = `${ctx.params.owner}/${ctx.params.repo}`
 
-	const repo = await github.getRepo(ctx.state.user.token, query)
+	const repo = await github.getRepo(token, slug)
 
-	// The repo param either invalid or the repository isn't found
-	// Return 404
 	if (!repo) {
 		ctx.status = 404
 		return
 	}
 
 	// Extract necessary details
-	const { full_name, archived, default_branch, has_issues } = repo
-
-	// Will we be able to create a new issue?
-	const possible = has_issues && !archived
+	const { full_name, default_branch } = repo
 
 	// Get repository Form
-	const form = await github.getForm(full_name, default_branch)
-
-	ctx.body = JSON.stringify({ full_name, possible, form })
+	try {
+		const res = await github.getForm(full_name, default_branch)
+		if (res.ok) {
+			ctx.body = await res.text()
+		} else {
+			ctx.status = 404
+		}
+	} catch (err) {
+		ctx.status = 500
+	}
 })
 
 module.exports = api
