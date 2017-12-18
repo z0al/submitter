@@ -61,7 +61,7 @@ export default class MyDocument extends Document {
 										as="a"
 										href="https://github.com/ahmed-taj/submitter"
 									>
-										<Icon name="github" />
+										<Icon name="github alternate" />
 										Fork on GitHub
 									</Button>
 								</Menu.Item>

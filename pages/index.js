@@ -23,7 +23,7 @@ class IndexPage extends React.Component {
 					icon="search"
 					iconPosition="left"
 					placeholder="e.g microsoft/vscode"
-					onChange={e => this.setState({ slug: e.target.value })}
+					onChange={e => this.setState({ slug: `/to/${e.target.value}` })}
 				/>
 				<FormButton positive size="large">
 					GET STARTED
