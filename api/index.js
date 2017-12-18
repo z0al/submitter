@@ -2,7 +2,7 @@
 const Router = require('koa-router')
 
 // Ours
-const passport = require('../lib/auth')
+const passport = require('./auth')
 const github = require('../lib/github')
 
 // Globals

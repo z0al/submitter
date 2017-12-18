@@ -7,7 +7,7 @@ const Next = require('next')
 // Ours
 const api = require('./api')
 const { dev, port, secret } = require('./config/env')
-const passport = require('./lib/auth')
+const passport = require('./api/auth')
 const github = require('./lib/github')
 
 const next = Next({ dev })
