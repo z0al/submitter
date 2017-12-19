@@ -10,14 +10,12 @@ class IndexPage extends React.Component {
 	render() {
 		return (
 			<Form className="prefectly-centered" action={this.state.slug}>
-				<Header
-					as="h2"
-					content="A Prettier UI for Submitting GitHub Issues"
-					style={{
-						fontSize: '1.7em',
-						fontWeight: 'normal'
-					}}
-				/>
+				<Header as="h1">
+					Submitter
+					<Header.Subheader>
+						A Prettier UI for Submitting GitHub Issues
+					</Header.Subheader>
+				</Header>
 				<Form.Input
 					size="large"
 					icon="github"

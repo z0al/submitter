@@ -71,7 +71,7 @@ export default class MyDocument extends Document {
 									<Image
 										href="/"
 										size="mini"
-										src="/static/rocket.svg"
+										src="/static/images/rocket.svg"
 										alt="rocket emoji"
 									/>
 									<Label pointing="left" color="purple">
