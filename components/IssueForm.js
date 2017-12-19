@@ -116,7 +116,9 @@ class IssueForm extends React.Component {
 					{this.renderFields()}
 
 					<Form.Group style={{ float: 'right' }}>
-						<Form.Button size="large">Preview</Form.Button>
+						<Form.Button color="purple" basic size="large">
+							Preview
+						</Form.Button>
 						<Form.Button color="purple" size="large">
 							Submit
 						</Form.Button>
