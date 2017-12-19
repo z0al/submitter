@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
 				<body>
 					<Segment
 						textAlign="center"
-						style={{ minHeight: 700, padding: '1em 0em' }}
+						style={{ minHeight: '100%', padding: '1em 0em' }}
 						vertical
 					>
 						<Container>
