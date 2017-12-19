@@ -43,7 +43,7 @@ class FormPage extends React.Component {
 			)
 		} else {
 			return (
-				<Container style={{ paddingTop: '10em' }}>
+				<Container className="prefectly-centered">
 					<Header as="h1">
 						):
 						<Header.Subheader>

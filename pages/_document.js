@@ -54,6 +54,12 @@ export default class MyDocument extends Document {
 							.content-wrapper {
 								flex-grow: 1;
 							}
+							.prefectly-centered {
+								height: 100% !important;
+								display: flex !important;
+								flex-direction: column;
+								justify-content: center;
+							}
 						`}
 					</style>
 				</Head>
