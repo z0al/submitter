@@ -3,6 +3,7 @@ import React from 'react'
 import { Form, Container, Button, Tab } from 'semantic-ui-react'
 
 // Components
+import Field from './Field'
 import Note from './Note'
 
 class IssueForm extends React.Component {
@@ -75,23 +76,8 @@ class IssueForm extends React.Component {
 		return this.props.fields
 			.filter(this.filterFields.bind(this))
 			.map((f, key) => {
-				return (
-					<Form.Field key={key}>
-						<label>{f.title}</label>
-						{this.renderInput(f.help)}
-					</Form.Field>
-				)
+				return <Field key={key} title={f.title} help={f.help} />
 			})
-	}
-
-	renderInput(help) {
-		// If the text is surrounded between parenthesis then we render it as a
-		// placeholder instead of normal description
-		const placeholder = /\((.*)\)/.exec(help)
-		if (placeholder) {
-			return <Form.TextArea placeholder={placeholder[1]} autoHeight />
-		}
-		return [<p>{help}</p>, <Form.TextArea autoHeight />]
 	}
 
 	renderTabs() {
@@ -122,10 +108,7 @@ class IssueForm extends React.Component {
 
 	render() {
 		return (
-			<Container
-				textAlign="left"
-				style={{ padding: '4em 0px', marginBottom: '50px' }}
-			>
+			<Container textAlign="left" style={{ padding: '4em 0px' }}>
 				<Note text={this.props.meta.note} />
 
 				<Form size="large">
