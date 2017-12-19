@@ -79,7 +79,7 @@ export default class MyDocument extends Document {
 				</Head>
 				<body>
 					<Segment textAlign="center" className="app-wrapper" vertical>
-						<Container>
+						<Container text>
 							<Header profile={this.props.profile} />
 						</Container>
 						<Container text className="content-wrapper">
