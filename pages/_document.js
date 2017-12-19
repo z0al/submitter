@@ -9,16 +9,50 @@ import {
 	Image,
 	Label,
 	Divider,
+	Dropdown,
 	Icon
 } from 'semantic-ui-react'
 
+// Ours
+import fetch from '../lib/fetch'
+
 export default class MyDocument extends Document {
-	static getInitialProps({ renderPage }) {
+	static async getInitialProps({ renderPage, req }) {
 		const { html, head, errorHtml, chunks } = renderPage()
 		const styles = flush()
-		return { html, head, errorHtml, chunks, styles }
+		// Get user profile
+		const res = await fetch(req, '/api/userinfo')
+		let profile = null
+		if (res.ok) {
+			profile = await res.json()
+		}
+		return { html, head, errorHtml, chunks, styles, profile }
 	}
 
+	renderProfile() {
+		if (this.props.profile === null) {
+			return (
+				<Button basic color="brown" as="a" href="/login">
+					Sign in / Sign up
+				</Button>
+			)
+		} else {
+			const { login, avatar_url, html_url } = this.props.profile
+
+			const trigger = (
+				<span>
+					<Image avatar src={avatar_url} /> {login}
+				</span>
+			)
+
+			const options = [
+				{ key: 'profile', text: 'Your Profile', href: html_url },
+				{ key: 'sign-out', text: 'Sign Out', href: '/logout' }
+			]
+
+			return <Dropdown trigger={trigger} options={options} />
+		}
+	}
 	render() {
 		return (
 			<html lang="en">
@@ -46,19 +80,33 @@ export default class MyDocument extends Document {
 								height: 100%;
 							}
 							.app-wrapper {
+								display: -webkit-box;
+								display: -ms-flexbox;
 								display: flex;
-								flex-direction: column;
+								-webkit-box-orient: vertical;
+								-webkit-box-direction: normal;
+								    -ms-flex-direction: column;
+								        flex-direction: column;
 								padding: 1em 0em;
 								min-height: 100%;
 							}
 							.content-wrapper {
-								flex-grow: 1;
+								-webkit-box-flex: 1;
+								    -ms-flex-positive: 1;
+								        flex-grow: 1;
 							}
 							.prefectly-centered {
 								height: 100% !important;
+								display: -webkit-box !important;
+								display: -ms-flexbox !important;
 								display: flex !important;
-								flex-direction: column;
-								justify-content: center;
+								-webkit-box-orient: vertical;
+								-webkit-box-direction: normal;
+								    -ms-flex-direction: column;
+								        flex-direction: column;
+								-webkit-box-pack: center;
+								    -ms-flex-pack: center;
+								        justify-content: center;
 							}
 						`}
 					</style>
@@ -78,16 +126,7 @@ export default class MyDocument extends Document {
 										BETA
 									</Label>
 								</Menu.Item>
-								<Menu.Item position="right">
-									<Button
-										basic
-										as="a"
-										href="https://github.com/ahmed-taj/submitter"
-									>
-										<Icon name="fork" />
-										Fork on GitHub
-									</Button>
-								</Menu.Item>
+								<Menu.Item position="right">{this.renderProfile()}</Menu.Item>
 							</Menu>
 						</Container>
 						<Container text className="content-wrapper">
