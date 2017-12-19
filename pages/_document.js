@@ -50,7 +50,11 @@ export default class MyDocument extends Document {
 							}
 
 							/* normalize divs surrounding the content*/
-							#__next {
+							#__next,
+							#__next > div {
+								min-height: 100%;
+								margin: 0px;
+								padding: 0px;
 								height: 100%;
 							}
 
