@@ -30,6 +30,19 @@ class IssueForm extends React.Component {
 		this.setState({ filter: data.value })
 	}
 
+	filterFields(f) {
+		if (this.state.filter) {
+			if (f.only_for === null) {
+				return true
+			}
+			if (f.only_for === this.state.filter) {
+				return true
+			}
+			return false
+		}
+		return true
+	}
+
 	//=============================================================================
 	// > Renderers
 	//=============================================================================
@@ -70,18 +83,7 @@ class IssueForm extends React.Component {
 
 	renderFields() {
 		return this.props.fields
-			.filter(f => {
-				if (this.state.filter) {
-					if (f.only_for === null) {
-						return true
-					}
-					if (f.only_for === this.state.filter) {
-						return true
-					}
-					return false
-				}
-				return true
-			})
+			.filter(this.filterFields.bind(this))
 			.map((f, key) => {
 				return (
 					<Form.Field key={key}>
