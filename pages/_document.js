@@ -1,22 +1,16 @@
 // Packages
 import Document, { Head, Main, NextScript } from 'next/document'
 import flush from 'styled-jsx/server'
-import {
-	Segment,
-	Container,
-	Menu,
-	Button,
-	Image,
-	Label,
-	Divider,
-	Dropdown,
-	Icon
-} from 'semantic-ui-react'
+import { Segment, Container, Divider, Icon } from 'semantic-ui-react'
 
 // Ours
 import fetch from '../lib/fetch'
 
+// Components
+import Header from '../components/Header'
+
 export default class MyDocument extends Document {
+	class
 	static async getInitialProps({ renderPage, req }) {
 		const { html, head, errorHtml, chunks } = renderPage()
 		const styles = flush()
@@ -29,30 +23,6 @@ export default class MyDocument extends Document {
 		return { html, head, errorHtml, chunks, styles, profile }
 	}
 
-	renderProfile() {
-		if (this.props.profile === null) {
-			return (
-				<Button basic color="brown" as="a" href="/login">
-					Sign in / Sign up
-				</Button>
-			)
-		} else {
-			const { login, avatar_url, html_url } = this.props.profile
-
-			const trigger = (
-				<span>
-					<Image avatar src={avatar_url} /> {login}
-				</span>
-			)
-
-			const options = [
-				{ key: 'profile', text: 'Your Profile', href: html_url },
-				{ key: 'sign-out', text: 'Sign Out', href: '/logout' }
-			]
-
-			return <Dropdown trigger={trigger} options={options} />
-		}
-	}
 	render() {
 		return (
 			<html lang="en">
@@ -114,20 +84,7 @@ export default class MyDocument extends Document {
 				<body>
 					<Segment textAlign="center" className="app-wrapper" vertical>
 						<Container>
-							<Menu secondary size="small">
-								<Menu.Item>
-									<Image
-										href="/"
-										size="mini"
-										src="/static/images/rocket.svg"
-										alt="rocket emoji"
-									/>
-									<Label pointing="left" color="purple">
-										BETA
-									</Label>
-								</Menu.Item>
-								<Menu.Item position="right">{this.renderProfile()}</Menu.Item>
-							</Menu>
+							<Header profile={this.props.profile} />
 						</Container>
 						<Container text className="content-wrapper">
 							<Main />
