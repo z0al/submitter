@@ -1,6 +1,6 @@
 // Packages
 import React from 'react'
-import { Form, Container, Message, Button } from 'semantic-ui-react'
+import { Form, Container, Message, Button, Tab } from 'semantic-ui-react'
 
 class IssueForm extends React.Component {
 	constructor() {
@@ -101,6 +101,31 @@ class IssueForm extends React.Component {
 				)
 			})
 	}
+	renderTabs() {
+		const panes = [
+			{
+				menuItem: 'Write',
+				pane: (
+					<Tab.Pane key="tab-write" size="large">
+						{this.renderFields()}
+					</Tab.Pane>
+				)
+			},
+			{
+				menuItem: 'Preview',
+				pane: (
+					<Tab.Pane
+						key="tab-preview"
+						size="large"
+						style={{ marginBottom: '1rem' }}
+					>
+						<p>Nothing to preview </p>
+					</Tab.Pane>
+				)
+			}
+		]
+		return <Tab panes={panes} renderActiveOnly={false} />
+	}
 
 	render() {
 		return (
@@ -108,21 +133,16 @@ class IssueForm extends React.Component {
 				textAlign="left"
 				style={{ padding: '4em 0px', marginBottom: '50px' }}
 			>
+				{this.renderNote()}
 				<Form size="large">
-					{this.renderNote()}
+					{this.renderTypes()}
 					<Form.Input placeholder="Title" />
 
-					{this.renderTypes()}
-					{this.renderFields()}
+					{this.renderTabs()}
 
-					<Form.Group style={{ float: 'right' }}>
-						<Form.Button color="purple" basic size="large">
-							Preview
-						</Form.Button>
-						<Form.Button color="purple" size="large">
-							Submit
-						</Form.Button>
-					</Form.Group>
+					<Form.Button color="purple" size="large" floated="right">
+						Submit
+					</Form.Button>
 				</Form>
 			</Container>
 		)
