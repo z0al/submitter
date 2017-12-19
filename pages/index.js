@@ -20,7 +20,7 @@ class IndexPage extends React.Component {
 				/>
 				<Form.Input
 					size="large"
-					icon="search"
+					icon="github"
 					iconPosition="left"
 					placeholder="e.g microsoft/vscode"
 					onChange={e => this.setState({ slug: `/to/${e.target.value}` })}

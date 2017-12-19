@@ -32,6 +32,13 @@ export default class MyDocument extends Document {
 						Submitter 🚀 | A Prettier UI for Submitting GitHub Issues
 					</title>
 					<link rel="stylesheet" href="/static/css/semantic.min.css" />
+					<style>
+						{`
+							*:not(.icon) {
+								font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
+							}
+						`}
+					</style>
 				</Head>
 				<body>
 					<Segment
@@ -58,7 +65,7 @@ export default class MyDocument extends Document {
 										as="a"
 										href="https://github.com/ahmed-taj/submitter"
 									>
-										<Icon name="github" />
+										<Icon name="fork" />
 										Fork on GitHub
 									</Button>
 								</Menu.Item>
