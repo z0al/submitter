@@ -37,46 +37,39 @@ export default class MyDocument extends Document {
 						Submitter 🚀 | A Prettier UI for Submitting GitHub Issues
 					</title>
 					<link rel="stylesheet" href="/static/css/semantic.min.css" />
-					<style>
+					<style jsx global>
 						{`
 							*:not(.icon) {
-								font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
+								font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+									Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+									Helvetica Neue, sans-serif !important;
 							}
+
 							body {
 								height: 100vh;
 							}
+
 							/* normalize divs surrounding the content*/
 							#__next {
 								height: 100%;
 							}
+
 							.app-wrapper {
-								display: -webkit-box;
-								display: -ms-flexbox;
 								display: flex;
-								-webkit-box-orient: vertical;
-								-webkit-box-direction: normal;
-								    -ms-flex-direction: column;
-								        flex-direction: column;
+								flex-direction: column;
 								padding: 1em 0em;
 								min-height: 100%;
 							}
+
 							.content-wrapper {
-								-webkit-box-flex: 1;
-								    -ms-flex-positive: 1;
-								        flex-grow: 1;
+								flex-grow: 1;
 							}
+
 							.prefectly-centered {
 								height: 100% !important;
-								display: -webkit-box !important;
-								display: -ms-flexbox !important;
 								display: flex !important;
-								-webkit-box-orient: vertical;
-								-webkit-box-direction: normal;
-								    -ms-flex-direction: column;
-								        flex-direction: column;
-								-webkit-box-pack: center;
-								    -ms-flex-pack: center;
-								        justify-content: center;
+								flex-direction: column;
+								justify-content: center;
 							}
 						`}
 					</style>
