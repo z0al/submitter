@@ -1,5 +1,7 @@
 <div align="center">
-  <img src="./static/images/rocket.svg" width="64" alt="rocket emoji"/>
+	<a href="https://submit.now.sh">
+  	<img src="./static/images/rocket.svg" width="64" alt="rocket emoji"/>
+	</a>
 	<h2>Submitter</h2>
   <p>A Prettier UI for Submitting GitHub Issues</p>
 
