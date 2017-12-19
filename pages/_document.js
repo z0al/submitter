@@ -31,10 +31,7 @@ export default class MyDocument extends Document {
 					<title>
 						Submitter 🚀 | A Prettier UI for Submitting GitHub Issues
 					</title>
-					<link
-						rel="stylesheet"
-						href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-					/>
+					<link rel="stylesheet" href="/static/css/semantic.min.css" />
 				</Head>
 				<body>
 					<Segment
