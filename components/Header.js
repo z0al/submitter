@@ -1,5 +1,5 @@
 // Packages
-import { Menu, Label, Image, Dropdown, Button } from 'semantic-ui-react'
+import { Menu, Label, Image, Dropdown, Button, Form } from 'semantic-ui-react'
 
 class Header extends React.Component {
 	renderProfile() {
@@ -14,16 +14,27 @@ class Header extends React.Component {
 
 			const trigger = (
 				<span>
-					<Image avatar src={avatar_url} /> {login}
+					<Image avatar src={avatar_url} />
 				</span>
 			)
 
 			const options = [
+				{
+					key: 'user',
+					text: (
+						<span>
+							Signed in as <strong>{login}</strong>
+						</span>
+					),
+					disabled: true
+				},
 				{ key: 'profile', text: 'Your Profile', href: html_url },
 				{ key: 'sign-out', text: 'Sign Out', href: '/logout' }
 			]
 
-			return <Dropdown trigger={trigger} options={options} />
+			return (
+				<Dropdown trigger={trigger} options={options} pointing="bottom right" />
+			)
 		}
 	}
 

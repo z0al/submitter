@@ -10,7 +10,6 @@ import fetch from '../lib/fetch'
 import Header from '../components/Header'
 
 export default class MyDocument extends Document {
-	class
 	static async getInitialProps({ renderPage, req }) {
 		const { html, head, errorHtml, chunks } = renderPage()
 		const styles = flush()

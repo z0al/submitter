@@ -5,8 +5,6 @@
 	<h2>Submitter</h2>
   <p>A Prettier UI for Submitting GitHub Issues</p>
 
-  <hr>
-
   <a href="https://travis-ci.org/ahmed-taj/submitter">
     <img src="https://img.shields.io/travis/ahmed-taj/submitter.svg?style=flat-square" alt="Travis status"/>
   </a>
