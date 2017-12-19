@@ -8,6 +8,7 @@ import {
 	Button,
 	Image,
 	Label,
+	Divider,
 	Icon
 } from 'semantic-ui-react'
 
@@ -37,15 +38,27 @@ export default class MyDocument extends Document {
 							*:not(.icon) {
 								font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
 							}
+							body {
+								height: 100vh;
+							}
+							/* normalize divs surrounding the content*/
+							#__next {
+								height: 100%;
+							}
+							.app-wrapper {
+								display: flex;
+								flex-direction: column;
+								padding: 1em 0em;
+								min-height: 100%;
+							}
+							.content-wrapper {
+								flex-grow: 1;
+							}
 						`}
 					</style>
 				</Head>
 				<body>
-					<Segment
-						textAlign="center"
-						style={{ minHeight: '100%', padding: '1em 0em' }}
-						vertical
-					>
+					<Segment textAlign="center" className="app-wrapper" vertical>
 						<Container>
 							<Menu secondary size="small">
 								<Menu.Item>
@@ -71,9 +84,14 @@ export default class MyDocument extends Document {
 								</Menu.Item>
 							</Menu>
 						</Container>
-						<Container text>
+						<Container text className="content-wrapper">
 							<Main />
 							<NextScript />
+						</Container>
+						<Container textAlign="center">
+							<Divider horizontal hidden clearing />
+							<Icon name="code" size="large" /> with{' '}
+							<Icon name="heart" color="red" size="large" /> by Ahmed T. Ali
 						</Container>
 					</Segment>
 				</body>
