@@ -97,7 +97,8 @@ export default class MyDocument extends Document {
 						<Container textAlign="center">
 							<Divider horizontal hidden clearing />
 							<Icon name="code" size="large" /> with{' '}
-							<Icon name="heart" color="red" size="large" /> by Ahmed T. Ali
+							<Icon name="heart" color="red" size="large" /> by{' '}
+							<a href="https://ahmed.sd">Ahmed T. Ali</a>
 						</Container>
 					</Segment>
 				</body>
