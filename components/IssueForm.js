@@ -34,16 +34,6 @@ class IssueForm extends React.Component {
 	// > Renderers
 	//=============================================================================
 
-	renderInput(help) {
-		// If the text is surrounded between parenthesis then we render it as a
-		// placeholder instead of normal description
-		const placeholder = /\((.*)\)/.exec(help)
-		if (placeholder) {
-			return <Form.TextArea placeholder={placeholder[1]} autoHeight />
-		}
-		return [<p>{help}</p>, <Form.TextArea autoHeight />]
-	}
-
 	renderNote() {
 		const { note } = this.props.meta
 		if (note) {
@@ -101,6 +91,17 @@ class IssueForm extends React.Component {
 				)
 			})
 	}
+
+	renderInput(help) {
+		// If the text is surrounded between parenthesis then we render it as a
+		// placeholder instead of normal description
+		const placeholder = /\((.*)\)/.exec(help)
+		if (placeholder) {
+			return <Form.TextArea placeholder={placeholder[1]} autoHeight />
+		}
+		return [<p>{help}</p>, <Form.TextArea autoHeight />]
+	}
+
 	renderTabs() {
 		const panes = [
 			{
@@ -136,7 +137,7 @@ class IssueForm extends React.Component {
 				{this.renderNote()}
 				<Form size="large">
 					{this.renderTypes()}
-					<Form.Input placeholder="Title" />
+					<Form.Input placeholder="Title" required />
 
 					{this.renderTabs()}
 
