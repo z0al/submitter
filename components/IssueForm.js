@@ -1,6 +1,9 @@
 // Packages
 import React from 'react'
-import { Form, Container, Message, Button, Tab } from 'semantic-ui-react'
+import { Form, Container, Button, Tab } from 'semantic-ui-react'
+
+// Components
+import Note from './Note'
 
 class IssueForm extends React.Component {
 	constructor() {
@@ -46,19 +49,6 @@ class IssueForm extends React.Component {
 	//=============================================================================
 	// > Renderers
 	//=============================================================================
-
-	renderNote() {
-		const { note } = this.props.meta
-		if (note) {
-			return (
-				<Message color="yellow">
-					<Message.Header>Note</Message.Header>
-					<p>{note}</p>
-				</Message>
-			)
-		}
-		return null
-	}
 
 	renderTypes() {
 		const { types } = this.props.meta
@@ -136,7 +126,8 @@ class IssueForm extends React.Component {
 				textAlign="left"
 				style={{ padding: '4em 0px', marginBottom: '50px' }}
 			>
-				{this.renderNote()}
+				<Note text={this.props.meta.note} />
+
 				<Form size="large">
 					{this.renderTypes()}
 					<Form.Input placeholder="Title" required />
