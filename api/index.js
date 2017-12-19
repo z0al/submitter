@@ -38,7 +38,8 @@ api.get('/logout', async ctx => {
 api.get('/api/userinfo', async ctx => {
 	ctx.assert(ctx.isAuthenticated(), 401, 'Unauthorized!')
 	ctx.type = 'application/json'
-	ctx.body = JSON.stringify(ctx.state.user)
+	const { login, avatar_url, html_url } = ctx.state.user
+	ctx.body = JSON.stringify({ login, avatar_url, html_url })
 })
 
 //=============================================================================
