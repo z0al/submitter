@@ -9,7 +9,15 @@ class IndexPage extends React.Component {
 
 	render() {
 		return (
-			<Form style={{ marginTop: '9em' }} action={this.state.slug}>
+			<Form
+				style={{
+					height: '100%',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'center'
+				}}
+				action={this.state.slug}
+			>
 				<Header
 					as="h2"
 					content="A Prettier UI for Submitting GitHub Issues"
