@@ -36,6 +36,7 @@ export default class MyDocument extends Document {
 						Submitter 🚀 | A Prettier UI for Submitting GitHub Issues
 					</title>
 					<link rel="stylesheet" href="/static/css/semantic.min.css" />
+					<link rel="stylesheet" href="/static/css/Draft.css" />
 					<link rel="stylesheet" href="/static/css/prism.css" />
 					<style jsx global>
 						{`
