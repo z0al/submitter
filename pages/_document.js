@@ -49,12 +49,17 @@ export default class MyDocument extends Document {
 							}
 
 							/* normalize divs surrounding the content*/
-							#__next,
-							#__next > div {
+							#__next {
+								display: flex;
+								flex-direction: column;
+								flex-grow: 1;
+							}
+
+							#__next {
 								min-height: 100%;
-								margin: 0px;
-								padding: 0px;
+								min-width: 100%;
 								height: 100%;
+								width: 100%;
 							}
 
 							.app-wrapper {
@@ -65,6 +70,8 @@ export default class MyDocument extends Document {
 							}
 
 							.content-wrapper {
+								display: flex !important;
+								flex-direction: column;
 								flex-grow: 1;
 							}
 
@@ -73,6 +80,7 @@ export default class MyDocument extends Document {
 								display: flex !important;
 								flex-direction: column;
 								justify-content: center;
+								flex-grow: 1;
 							}
 						`}
 					</style>
