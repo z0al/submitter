@@ -11,7 +11,6 @@ class IssueForm extends React.Component {
 	constructor() {
 		super()
 		this.state = { body: '', filter: '' }
-		this.typesMap = null
 	}
 
 	//===========================================================================
@@ -21,17 +20,8 @@ class IssueForm extends React.Component {
 	componentWillMount() {
 		const { types } = this.props.meta
 		if (types && types.length > 0) {
-			this.typesMap = types.map(t => ({
-				text: t,
-				value: this.normalizeType(t)
-			}))
-
-			this.setState({ filter: this.typesMap[0].text })
+			this.setState({ filter: types[0].value })
 		}
-	}
-
-	normalizeType(str) {
-		return str.toLowerCase().replace(/\s{2,}/g, ' ')
 	}
 
 	//===========================================================================
@@ -60,10 +50,10 @@ class IssueForm extends React.Component {
 	//===========================================================================
 
 	renderTypes() {
-		if (this.typesMap) {
+		if (this.props.meta.types) {
 			return (
 				<IssueTypes
-					options={this.typesMap}
+					options={this.props.meta.types}
 					onChange={this.changeFilter.bind(this)}
 				/>
 			)
