@@ -86,8 +86,16 @@ export default class MyDocument extends Document {
 
 							/* Draft.js Editor */
 							.field > div.DraftEditor-root {
-								border: 1px dashed #bcbcbc;
-								padding: 5px;
+								border: 1px solid lightgray;
+								padding: 0.5em 1em;
+							}
+
+							.field > div.input {
+								border: 1px solid lightgray;
+							}
+
+							div.required.field > .ui.input > input {
+								border: none;
 							}
 						`}
 					</style>

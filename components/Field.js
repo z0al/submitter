@@ -2,7 +2,7 @@
 import { FormField } from 'semantic-ui-react'
 import { EditorState } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
-import MarkdownPlugin from 'draft-js-markdown-shortcuts-plugin'
+import MarkdownPlugin from 'draft-js-markdown-plugin'
 import PrismPlugin from 'draft-js-prism-plugin'
 
 // Prism
@@ -39,6 +39,7 @@ class Field extends React.Component {
 						plugins={plugins}
 					/>
 				) : null}
+				<pre>{this.state.content.getCurrentContent().getPlainText()}</pre>
 			</FormField>
 		)
 	}
