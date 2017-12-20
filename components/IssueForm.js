@@ -110,6 +110,7 @@ class IssueForm extends React.Component {
 			<Container textAlign="left" style={{ padding: '4em 0px' }}>
 				<Note text={this.props.meta.note} />
 
+				<Divider clearing hidden />
 				<Breadcrumb size="huge">
 					<i className="github large icon" style={{ marginLeft: '-0.1em' }} />
 					<Breadcrumb.Section href={`https://github.com/${owner}`}>
@@ -120,7 +121,6 @@ class IssueForm extends React.Component {
 						{name}
 					</Breadcrumb.Section>
 				</Breadcrumb>
-
 				<Divider clearing hidden />
 
 				<Form
