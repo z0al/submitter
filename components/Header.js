@@ -49,7 +49,7 @@ class Header extends React.Component {
 						alt="rocket emoji"
 					/>
 					<Label pointing="left" color="purple">
-						BETA
+						PREVIEW
 					</Label>
 				</Menu.Item>
 				<Menu.Item position="right">{this.renderProfile()}</Menu.Item>

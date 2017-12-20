@@ -1,10 +1,10 @@
 // Packages
 import { FormField } from 'semantic-ui-react'
-import { EditorState } from 'draft-js'
+import { EditorState, convertToRaw } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
 import MarkdownPlugin from 'draft-js-markdown-plugin'
 import PrismPlugin from 'draft-js-prism-plugin'
-import { stateToMarkdown } from 'draft-js-export-markdown'
+import { draftToMarkdown } from 'markdown-draft-js'
 
 // Prism
 import prism from 'prismjs'
@@ -28,7 +28,7 @@ class Field extends React.Component {
 		this.setState({ content })
 		this.props.onChange(
 			this.props.title,
-			stateToMarkdown(content.getCurrentContent())
+			draftToMarkdown(convertToRaw(content.getCurrentContent()))
 		)
 	}
 
