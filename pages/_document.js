@@ -88,6 +88,14 @@ export default class MyDocument extends Document {
 							.field > div.DraftEditor-root {
 								padding: 1em 0em;
 							}
+							/* Fix Draft.js embedded images */
+							.field > div.DraftEditor-root img {
+								height: 100%;
+								width: 100%;
+							}
+							.field > div.DraftEditor-root img:hover {
+								border: 1px solid purple;
+							}
 
 							/* Remove border of issue title field */
 							div.required.field > .ui.input,
