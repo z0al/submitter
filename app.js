@@ -1,5 +1,6 @@
 // Packages
 const Koa = require('koa')
+const BodyParser = require('koa-body')
 const Router = require('koa-router')
 const Session = require('koa-session')
 const Next = require('next')
@@ -19,6 +20,9 @@ next.prepare().then(() => {
 
 	// Keys
 	app.keys = [secret]
+
+	// Body parser
+	app.use(BodyParser())
 
 	// Session
 	app.use(Session({ key: 'session' }, app))
