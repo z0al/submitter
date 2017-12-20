@@ -1,6 +1,6 @@
 // Packages
 import React from 'react'
-import { Form, Container, Button, Divider } from 'semantic-ui-react'
+import { Form, Container, Button, Divider, Breadcrumb } from 'semantic-ui-react'
 
 // Components
 import Field from './Field'
@@ -70,9 +70,24 @@ class IssueForm extends React.Component {
 	}
 
 	render() {
+		const [owner, name] = this.props.path.split('/')
+
 		return (
 			<Container textAlign="left" style={{ padding: '4em 0px' }}>
 				<Note text={this.props.meta.note} />
+
+				<Breadcrumb size="huge">
+					<i className="github large icon" style={{ marginLeft: '-0.1em' }} />
+					<Breadcrumb.Section link href={`https://github.com/${owner}`}>
+						{owner}
+					</Breadcrumb.Section>
+					<i className="icon divider">/</i>
+					<Breadcrumb.Section link href={`https://github.com/${owner}/${name}`}>
+						{name}
+					</Breadcrumb.Section>
+				</Breadcrumb>
+
+				<Divider clearing hidden />
 
 				<Form size="large" loading={this.props.loading}>
 					<Form.Input placeholder="Title" size="big" required />
