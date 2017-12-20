@@ -10,7 +10,7 @@ import Note from './Note'
 class IssueForm extends React.Component {
 	constructor() {
 		super()
-		this.state = { body: '', filter: '' }
+		this.state = { body: '', filter: '', title: '', values: {}, loading: false }
 	}
 
 	//===========================================================================
@@ -65,8 +65,42 @@ class IssueForm extends React.Component {
 		return this.props.fields
 			.filter(this.filterFields.bind(this))
 			.map((f, key) => {
-				return <Field key={f.title} title={f.title} help={f.help} />
+				return (
+					<Field
+						key={f.title}
+						title={f.title}
+						help={f.help}
+						onChange={this.onFieldChange.bind(this)}
+					/>
+				)
 			})
+	}
+
+	//===========================================================================
+	// > Handlers
+	//===========================================================================
+
+	onTitleChange(event) {
+		this.setState({ title: event.target.value })
+	}
+
+	onFieldChange(title, markdown) {
+		const { values } = this.state
+		values[title] = markdown
+		this.setState({ values })
+	}
+
+	onSubmit() {
+		// Disable editing
+		this.setState({ loading: true })
+		const { title, values } = this.state
+		// Filter fields
+		const fields = this.props.fields
+			.filter(this.filterFields.bind(this))
+			.map(f => `## ${f.title}\n\n${values[f.title]}`)
+
+		// Submit
+		this.props.onSubmit(title, fields)
 	}
 
 	render() {
@@ -89,8 +123,17 @@ class IssueForm extends React.Component {
 
 				<Divider clearing hidden />
 
-				<Form size="large" loading={this.props.loading}>
-					<Form.Input placeholder="Title" size="big" required />
+				<Form
+					size="large"
+					loading={this.state.loading}
+					onSubmit={this.onSubmit.bind(this)}
+				>
+					<Form.Input
+						placeholder="Title"
+						size="big"
+						onChange={this.onTitleChange.bind(this)}
+						required
+					/>
 					<Divider />
 					{this.renderTypes()}
 					{this.renderFields()}

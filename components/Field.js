@@ -4,6 +4,7 @@ import { EditorState } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
 import MarkdownPlugin from 'draft-js-markdown-plugin'
 import PrismPlugin from 'draft-js-prism-plugin'
+import { stateToMarkdown } from 'draft-js-export-markdown'
 
 // Prism
 import prism from 'prismjs'
@@ -25,6 +26,10 @@ class Field extends React.Component {
 
 	onChange = content => {
 		this.setState({ content })
+		this.props.onChange(
+			this.props.title,
+			stateToMarkdown(content.getCurrentContent())
+		)
 	}
 
 	render() {
