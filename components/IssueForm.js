@@ -4,34 +4,42 @@ import { Form, Container, Button, Tab } from 'semantic-ui-react'
 
 // Components
 import Field from './Field'
+import IssueTypes from './IssueTypes'
 import Note from './Note'
 
 class IssueForm extends React.Component {
 	constructor() {
 		super()
 		this.state = { body: '', filter: '' }
+		this.typesMap = null
 	}
-	//=============================================================================
+
+	//===========================================================================
 	// > Hooks
-	//=============================================================================
+	//===========================================================================
 
 	componentWillMount() {
 		const { types } = this.props.meta
 		if (types && types.length > 0) {
-			this.setState({ filter: this.normalizeType(types[0]) })
+			this.typesMap = types.map(t => ({
+				text: t,
+				value: this.normalizeType(t)
+			}))
+
+			this.setState({ filter: this.typesMap[0].text })
 		}
 	}
 
-	//=============================================================================
-	// > Helpers
-	//=============================================================================
-
-	normalizeType(typestr) {
-		return typestr.toLowerCase().replace(/\s{2,}/g, ' ')
+	normalizeType(str) {
+		return str.toLowerCase().replace(/\s{2,}/g, ' ')
 	}
 
-	changeFilter(event, data) {
-		this.setState({ filter: data.value })
+	//===========================================================================
+	// > Helpers
+	//===========================================================================
+
+	changeFilter(value) {
+		this.setState({ filter: value })
 	}
 
 	filterFields(f) {
@@ -47,37 +55,20 @@ class IssueForm extends React.Component {
 		return true
 	}
 
-	//=============================================================================
+	//===========================================================================
 	// > Renderers
-	//=============================================================================
+	//===========================================================================
 
 	renderTypes() {
-		const { types } = this.props.meta
-		if (types) {
-			const options = types.map(t => ({
-				text: t,
-				value: this.normalizeType(t)
-			}))
+		if (this.typesMap) {
 			return (
-				<Form.Dropdown
-					inline
-					label="I'm submitting"
-					options={options}
-					style={{ color: 'purple' }}
-					defaultValue={options[0].value}
+				<IssueTypes
+					options={this.typesMap}
 					onChange={this.changeFilter.bind(this)}
 				/>
 			)
 		}
 		return null
-	}
-
-	renderFields() {
-		return this.props.fields
-			.filter(this.filterFields.bind(this))
-			.map((f, key) => {
-				return <Field key={key} title={f.title} help={f.help} />
-			})
 	}
 
 	renderTabs() {
@@ -106,6 +97,14 @@ class IssueForm extends React.Component {
 		return <Tab panes={panes} renderActiveOnly={false} />
 	}
 
+	renderFields() {
+		return this.props.fields
+			.filter(this.filterFields.bind(this))
+			.map((f, key) => {
+				return <Field key={key} title={f.title} help={f.help} />
+			})
+	}
+
 	render() {
 		return (
 			<Container textAlign="left" style={{ padding: '4em 0px' }}>
@@ -113,6 +112,7 @@ class IssueForm extends React.Component {
 
 				<Form size="large">
 					{this.renderTypes()}
+
 					<Form.Input placeholder="Title" required />
 
 					{this.renderTabs()}
