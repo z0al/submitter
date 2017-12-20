@@ -78,11 +78,11 @@ class IssueForm extends React.Component {
 
 				<Breadcrumb size="huge">
 					<i className="github large icon" style={{ marginLeft: '-0.1em' }} />
-					<Breadcrumb.Section link href={`https://github.com/${owner}`}>
+					<Breadcrumb.Section href={`https://github.com/${owner}`}>
 						{owner}
 					</Breadcrumb.Section>
 					<i className="icon divider">/</i>
-					<Breadcrumb.Section link href={`https://github.com/${owner}/${name}`}>
+					<Breadcrumb.Section href={`https://github.com/${owner}/${name}`}>
 						{name}
 					</Breadcrumb.Section>
 				</Breadcrumb>
