@@ -65,7 +65,7 @@ class IssueForm extends React.Component {
 		return this.props.fields
 			.filter(this.filterFields.bind(this))
 			.map((f, key) => {
-				return <Field key={'field_' + key} title={f.title} help={f.help} />
+				return <Field key={f.title} title={f.title} help={f.help} />
 			})
 	}
 
