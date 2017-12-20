@@ -1,3 +1,4 @@
+// Packages
 import { FormField, FormTextArea } from 'semantic-ui-react'
 
 class Field extends React.Component {
@@ -6,9 +7,18 @@ class Field extends React.Component {
 		// placeholder instead of normal description
 		const placeholder = /\((.*)\)/.exec(this.props.help)
 		if (placeholder) {
-			return <FormTextArea placeholder={placeholder[1]} autoHeight />
+			return (
+				<FormTextArea
+					placeholder={placeholder[1]}
+					key={'text_' + this.props.key}
+					autoHeight
+				/>
+			)
 		}
-		return [<p>{this.props.help}</p>, <FormTextArea autoHeight />]
+		return [
+			<p key={'help_' + this.props.key}>{this.props.help}</p>,
+			<FormTextArea key={'text_' + this.props.key} autoHeight />
+		]
 	}
 
 	render() {

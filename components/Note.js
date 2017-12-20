@@ -1,3 +1,4 @@
+// Packages
 import { Message } from 'semantic-ui-react'
 
 const Note = props => {
