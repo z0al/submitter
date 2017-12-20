@@ -63,6 +63,7 @@ next.prepare().then(() => {
 				return
 			}
 
+			ctx.status = 200
 			await next.render(ctx.req, ctx.res, '/_form', ctx.query)
 			ctx.respond = false
 		}

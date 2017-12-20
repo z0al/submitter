@@ -68,6 +68,7 @@ api.get('/api/:owner/:name/submit.json', async ctx => {
 	if (res.ok) {
 		const text = await res.text()
 		try {
+			ctx.status = 200
 			ctx.body = JSON.stringify(await validateForm(text))
 		} catch (err) {
 			ctx.status = 422
@@ -100,6 +101,7 @@ api.post('/api/:owner/:name/submit', async ctx => {
 		)
 
 		// Response
+		ctx.status = 200
 		ctx.type = 'application/json'
 		ctx.body = JSON.stringify({ id, html_url })
 	} else {
