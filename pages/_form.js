@@ -11,7 +11,7 @@ import IssueForm from '../components/IssueForm'
 class FormPage extends React.Component {
 	static async getInitialProps({ req }) {
 		// Extract owner and name
-		const match = /to\/([^\/]+)\/([^\/]+)/.exec(req.url)
+		const match = /to\/([^\/]+)\/([^\/\?]+)/.exec(req.url)
 		const owner = match[1]
 		const name = match[2]
 
