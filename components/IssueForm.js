@@ -1,6 +1,6 @@
 // Packages
 import React from 'react'
-import { Form, Container, Button } from 'semantic-ui-react'
+import { Form, Container, Button, Divider } from 'semantic-ui-react'
 
 // Components
 import Field from './Field'
@@ -85,13 +85,17 @@ class IssueForm extends React.Component {
 				<Note text={this.props.meta.note} />
 
 				<Form size="large">
+					<Form.Input placeholder="Title" size="big" required />
+					<Divider />
 					{this.renderTypes()}
-
-					<Form.Input placeholder="Title" required />
-
 					{this.renderFields()}
-
-					<Form.Button color="purple" size="large" floated="right">
+					<Divider hidden clearing horizontal />
+					<Form.Button
+						color="purple"
+						size="large"
+						floated="right"
+						style={{ marginTop: '2em' }}
+					>
 						Submit
 					</Form.Button>
 				</Form>

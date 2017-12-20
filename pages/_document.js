@@ -84,19 +84,16 @@ export default class MyDocument extends Document {
 								justify-content: center;
 								flex-grow: 1;
 							}
-
 							/* Draft.js Editor */
 							.field > div.DraftEditor-root {
-								border: 1px solid lightgray;
-								padding: 0.5em 1em;
+								padding: 1em 0em;
 							}
 
-							.field > div.input {
-								border: 1px solid lightgray;
-							}
-
+							/* Remove border of issue title field */
+							div.required.field > .ui.input,
 							div.required.field > .ui.input > input {
 								border: none;
+								padding: 0px;
 							}
 						`}
 					</style>
