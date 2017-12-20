@@ -12,6 +12,10 @@
 		"start": "NODE_ENV=production node app.js"
 	},
 	"dependencies": {
+		"draft-js": "^0.10.4",
+		"draft-js-markdown-shortcuts-plugin": "^0.3.0",
+		"draft-js-plugins-editor": "^2.0.3",
+		"draft-js-prism-plugin": "^0.1.1",
 		"isomorphic-unfetch": "^2.0.0",
 		"joi": "^13.0.2",
 		"js-yaml": "^3.10.0",
@@ -21,6 +25,7 @@
 		"koa-session": "^5.5.1",
 		"next": "^4.3.0-canary.1",
 		"passport-github": "^1.1.0",
+		"prismjs": "^1.9.0",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"semantic-ui-react": "^0.77.1",

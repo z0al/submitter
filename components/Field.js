@@ -1,31 +1,44 @@
 // Packages
-import { FormField, FormTextArea } from 'semantic-ui-react'
+import { FormField } from 'semantic-ui-react'
+import { EditorState } from 'draft-js'
+import Editor from 'draft-js-plugins-editor'
+import MarkdownPlugin from 'draft-js-markdown-shortcuts-plugin'
+import PrismPlugin from 'draft-js-prism-plugin'
+
+// Prism
+import prism from 'prismjs'
+
+// Editor plugins
+const plugins = [PrismPlugin({ prism }), MarkdownPlugin()]
 
 class Field extends React.Component {
-	renderInput() {
-		// If the text is surrounded between parenthesis then we render it as a
-		// placeholder instead of normal description
-		const placeholder = /\((.*)\)/.exec(this.props.help)
-		if (placeholder) {
-			return (
-				<FormTextArea
-					placeholder={placeholder[1]}
-					key={'text_' + this.props.key}
-					autoHeight
-				/>
-			)
-		}
-		return [
-			<p key={'help_' + this.props.key}>{this.props.help}</p>,
-			<FormTextArea key={'text_' + this.props.key} autoHeight />
-		]
+	state = {
+		// A workaround to turn off Draft.js rendering on the server side
+		onBrowser: false,
+		content: EditorState.createEmpty()
+	}
+
+	componentDidMount = () => {
+		// We are no longer on server
+		this.setState({ onBrowser: true })
+	}
+
+	onChange = content => {
+		this.setState({ content })
 	}
 
 	render() {
+		const { onBrowser } = this.state
 		return (
-			<FormField key={this.props.key}>
+			<FormField>
 				<label>{this.props.title}</label>
-				{this.renderInput()}
+				{onBrowser ? (
+					<Editor
+						editorState={this.state.content}
+						onChange={this.onChange}
+						plugins={plugins}
+					/>
+				) : null}
 			</FormField>
 		)
 	}
