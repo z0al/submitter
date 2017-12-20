@@ -92,7 +92,7 @@ api.post('/api/:owner/:name/submit', async ctx => {
 		const { token } = ctx.state.user
 		const { owner, name } = ctx.params
 
-		const { id, html_url } = await github.createIssue(
+		const { html_url } = await github.createIssue(
 			token,
 			owner,
 			name,
@@ -103,7 +103,7 @@ api.post('/api/:owner/:name/submit', async ctx => {
 		// Response
 		ctx.status = 200
 		ctx.type = 'application/json'
-		ctx.body = JSON.stringify({ id, html_url })
+		ctx.body = JSON.stringify({ html_url })
 	} else {
 		ctx.throw(415, 'Unsupported media type!')
 	}
