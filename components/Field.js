@@ -37,9 +37,9 @@ class Field extends React.Component {
 						editorState={this.state.content}
 						onChange={this.onChange}
 						plugins={plugins}
+						placeholder={this.props.help || 'Write here'}
 					/>
 				) : null}
-				<pre>{this.state.content.getCurrentContent().getPlainText()}</pre>
 			</FormField>
 		)
 	}
