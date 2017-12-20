@@ -84,7 +84,7 @@ class IssueForm extends React.Component {
 			<Container textAlign="left" style={{ padding: '4em 0px' }}>
 				<Note text={this.props.meta.note} />
 
-				<Form size="large">
+				<Form size="large" loading={this.props.loading}>
 					<Form.Input placeholder="Title" size="big" required />
 					<Divider />
 					{this.renderTypes()}

@@ -26,9 +26,9 @@ class FormPage extends React.Component {
 
 		try {
 			const src = await res.json()
-			return { found: true, src, full_name }
+			return { found: true, loading: false, src, full_name }
 		} catch (err) {
-			return { found: false, full_name }
+			return { found: false, loading: false, full_name }
 		}
 	}
 
@@ -39,6 +39,7 @@ class FormPage extends React.Component {
 					meta={this.props.src.meta}
 					fields={this.props.src.form}
 					path={this.props.full_name}
+					loading={this.props.loading}
 				/>
 			)
 		} else {
