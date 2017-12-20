@@ -83,6 +83,12 @@ export default class MyDocument extends Document {
 								justify-content: center;
 								flex-grow: 1;
 							}
+
+							/* Draft.js Editor */
+							.field > div.DraftEditor-root {
+								border: 1px dashed #bcbcbc;
+								padding: 5px;
+							}
 						`}
 					</style>
 				</Head>
