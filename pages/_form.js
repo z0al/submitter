@@ -7,6 +7,7 @@ import fetch from '../lib/fetch'
 
 // Components
 import IssueForm from '../components/IssueForm'
+import Error from '../components/Error'
 
 class FormPage extends React.Component {
 	static async getInitialProps({ req }) {
@@ -26,9 +27,9 @@ class FormPage extends React.Component {
 
 		try {
 			const src = await res.json()
-			return { found: true, loading: false, src, full_name }
+			return { found: true, src, full_name }
 		} catch (err) {
-			return { found: false, loading: false, full_name }
+			return { found: false, full_name }
 		}
 	}
 
@@ -39,26 +40,18 @@ class FormPage extends React.Component {
 					meta={this.props.src.meta}
 					fields={this.props.src.form}
 					path={this.props.full_name}
-					loading={this.props.loading}
 				/>
 			)
 		} else {
+			const url = `https://github.com/${this.props.full_name}`
 			return (
-				<Container className="prefectly-centered">
-					<Header as="h1">
-						):
-						<Header.Subheader>
-							Looks like the repository at{' '}
-							<a
-								href={`https://github.com/${this.props.full_name}`}
-								style={{ color: 'blue', fontWeight: 'bold' }}
-							>
-								{this.props.full_name}
-							</a>{' '}
-							isn't submission friendly!
-						</Header.Subheader>
-					</Header>
-				</Container>
+				<Error>
+					Looks like the repository at{' '}
+					<a href={url} style={{ color: 'purple' }}>
+						{this.props.full_name}
+					</a>{' '}
+					isn't submission friendly!
+				</Error>
 			)
 		}
 	}
