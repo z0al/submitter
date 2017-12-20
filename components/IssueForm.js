@@ -1,6 +1,6 @@
 // Packages
 import React from 'react'
-import { Form, Container, Button, Tab } from 'semantic-ui-react'
+import { Form, Container, Button } from 'semantic-ui-react'
 
 // Components
 import Field from './Field'
@@ -71,32 +71,6 @@ class IssueForm extends React.Component {
 		return null
 	}
 
-	renderTabs() {
-		const panes = [
-			{
-				menuItem: 'Write',
-				pane: (
-					<Tab.Pane key="tab-write" size="large">
-						{this.renderFields()}
-					</Tab.Pane>
-				)
-			},
-			{
-				menuItem: 'Preview',
-				pane: (
-					<Tab.Pane
-						key="tab-preview"
-						size="large"
-						style={{ marginBottom: '1rem' }}
-					>
-						<p>Nothing to preview </p>
-					</Tab.Pane>
-				)
-			}
-		]
-		return <Tab panes={panes} renderActiveOnly={false} />
-	}
-
 	renderFields() {
 		return this.props.fields
 			.filter(this.filterFields.bind(this))
@@ -115,7 +89,7 @@ class IssueForm extends React.Component {
 
 					<Form.Input placeholder="Title" required />
 
-					{this.renderTabs()}
+					{this.renderFields()}
 
 					<Form.Button color="purple" size="large" floated="right">
 						Submit
