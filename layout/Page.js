@@ -7,15 +7,17 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import fetch from '../lib/fetch'
 
-export default ({ children }) => (
-	<Segment textAlign="center" className="app-wrapper" vertical>
-		<Meta />
-		<Container text>
-			<Navbar />
-		</Container>
-		<Container text className="content-wrapper">
-			{children}
-		</Container>
-		<Footer />
-	</Segment>
-)
+export default ({ children, profile }) => {
+	return (
+		<Segment textAlign="center" className="app-wrapper" vertical>
+			<Meta />
+			<Container text>
+				<Navbar profile={profile} />
+			</Container>
+			<Container text className="content-wrapper">
+				{children}
+			</Container>
+			<Footer />
+		</Segment>
+	)
+}

@@ -32,7 +32,7 @@ export default class extends React.Component {
 						{ key: 'profile', text: 'Your Profile', href: html_url },
 						{ key: 'sign-out', text: 'Sign Out', href: '/logout' }
 					]}
-					pointing="bottom right"
+					pointing="top right"
 				/>
 			)
 		}
