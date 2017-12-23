@@ -7,6 +7,12 @@ export default () => (
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta httpEquiv="X-UA-Compatible" content="ie=edge" />
 		<title>Submitter 🚀 | A Prettier UI for Submitting GitHub Issues</title>
+		<meta property="og:title" content="Submitter 🚀" />
+		<meta
+			property="og:description"
+			content="A Prettier UI for Submitting GitHub Issues"
+		/>
+		<meta property="og:url" content="https://submit.now.sh" />
 		<link rel="stylesheet" href="/static/css/semantic.min.css" />
 		<link rel="stylesheet" href="/static/css/Draft.css" />
 		<link rel="stylesheet" href="/static/css/prism.css" />
