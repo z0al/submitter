@@ -1,0 +1,17 @@
+meta:
+  types: 
+    - Feature request
+    - Bug report
+    - Question
+
+form:
+  A brief description:
+
+  # Bugs
+  Current behavior:
+    for: bug report
+  Steps to reproduce:
+    for: bug report
+  Demo / Screenshots:
+    for: bug report
+  

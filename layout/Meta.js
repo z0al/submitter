@@ -56,6 +56,7 @@ export default () => (
 					justify-content: center;
 					flex-grow: 1;
 				}
+
 				/* Draft.js Editor */
 				.field > div.DraftEditor-root {
 					padding: 1em 0em;
