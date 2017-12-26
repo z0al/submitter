@@ -48,7 +48,11 @@ export default class extends React.Component {
 						src="/static/images/rocket.svg"
 						alt="rocket emoji"
 					/>
-					<Label pointing="left" color="purple">
+					<Label
+						pointing="left"
+						color="purple"
+						title="Pre-beta release, use at your own risk"
+					>
 						PREVIEW
 					</Label>
 				</Menu.Item>
