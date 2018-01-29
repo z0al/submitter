@@ -51,7 +51,7 @@ export default class extends React.Component {
 					<Label
 						pointing="left"
 						color="purple"
-						title="Pre-beta release, use at your own risk"
+						title="Pre-alpha release, probably not working at all. Use at your own risk"
 					>
 						PREVIEW
 					</Label>
