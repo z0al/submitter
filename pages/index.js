@@ -36,7 +36,7 @@ class IndexPage extends React.Component {
 						size="large"
 						icon="github"
 						iconPosition="left"
-						placeholder="e.g microsoft/vscode"
+						placeholder="e.g ahmed-taj/test"
 						onChange={e => this.setState({ slug: `/to/${e.target.value}` })}
 					/>
 					<Form.Button positive size="large">
